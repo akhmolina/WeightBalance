@@ -3,7 +3,7 @@ import java.util.BitSet;
 
 public class SubsetSum {
 	private int[] Set;
-	private int MaxW = 0; //Максимальное значение должно быть < Integer.MAX_VALUE/2
+	private int MaxW = 0; //max element from Set must be < Integer.MAX_VALUE/2
 	private int MinW = Integer.MAX_VALUE;
 	private Subset[] Solutions;
 	private int[] Values;
@@ -14,7 +14,7 @@ public class SubsetSum {
 	public SubsetSum(int[] Array)throws IllegalArgumentException
 	{
 		if (Array.length <=1)
-		{throw new IllegalArgumentException("Размер последовательности должен быть больше 1.");}
+		{throw new IllegalArgumentException("Р Р°Р·РјРµСЂ РїРѕСЃР»РµРґРѕРІР°С‚РµР»СЊРЅРѕСЃС‚Рё РґРѕР»Р¶РµРЅ Р±С‹С‚СЊ Р±РѕР»СЊС€Рµ 1.");}
 		Set = Array;
  
 		long sum = 0;
@@ -31,10 +31,10 @@ public class SubsetSum {
 	{
 		Sum = sum;
 		if (Sum < MinW || Sum> SetSum)
-		{throw new IllegalArgumentException("Требуемая сумма " + Sum 
-				+ " чисел не может быть выбрана из последовательности.");}
+		{throw new IllegalArgumentException("РўСЂРµР±СѓРµРјР°СЏ СЃСѓРјРјР° " + Sum 
+				+ " С‡РёСЃРµР» РЅРµ РјРѕР¶РµС‚ Р±С‹С‚СЊ РІС‹Р±СЂР°РЅР° РёР· РїРѕСЃР»РµРґРѕРІР°С‚РµР»СЊРЅРѕСЃС‚Рё.");}
 
-		//начало для поиска - BreakSolution
+		//search starting on BreakSolution
 		BitSet BreakSolutionBitSet = new BitSet();
 		BreakSolutionBitSet.set(0);
 		Subset BreakSolution = new Subset(Set, BreakSolutionBitSet);
@@ -53,12 +53,12 @@ public class SubsetSum {
 		Subset NewInsSolution = null; 
 		Subset[] LastSolutions;
 		
-		Solutions = new Subset[2*MaxW]; //от Sum-MaxW+1  до Sum+MaxW
-		Values = new int[2*MaxW]; //от Sum-MaxW+1  до Sum+MaxW
+		Solutions = new Subset[2*MaxW]; //from Sum-MaxW+1  to Sum+MaxW
+		Values = new int[2*MaxW]; //from Sum-MaxW+1  to Sum+MaxW
 		
-		for (int i = 0; i<MaxW-1; i++){Values[i] = 0;}	//индекс MaxW-1 - соответствует искомой сумме 	
+		for (int i = 0; i<MaxW-1; i++){Values[i] = 0;}	// MaxW-1 index - sum we are searching for 	
 		for (int i = MaxW; i<2*MaxW; i++){Values[i] = 1;}
-		Values[breakSolutionIndex] = bitnumber+1;//записываем следующий бит t и  к нему + 1, т.к. индексы с нуля, а у нас 0 - отсутсвие решения
+		Values[breakSolutionIndex] = bitnumber+1;//next bit is t and + 1, cause we are counting from 0, but in algorithm 0 means no solution exist
 		Solutions[breakSolutionIndex] = BreakSolution;
 		NewInsSolution = BreakSolution;
 		
@@ -68,7 +68,7 @@ public class SubsetSum {
 		for (int i = bitnumber; i < Set.length; i++)
 		{	
 			LastSolutions = Solutions.clone();
-			for( int n = 0; n<MaxW-1; n++) //MaxW-1 не смотрим, ибо он уже есть решение
+			for( int n = 0; n<MaxW-1; n++)
 			{
 				if (LastSolutions[n]!= null)	
 				{
@@ -88,20 +88,20 @@ public class SubsetSum {
 						
 						if (newsumindex>=MaxW)
 						{
-							int start = Values[newsumindex]-1; // тут -1, потому что индексы у нас с нуля, а значения с 1
+							int start = Values[newsumindex]-1; 
 							int end = lastsum-1;
 							
-							Subset Ret = RecourciveRemove(NewInsSolution,start-1, end);// тут -1 потому что текущее значение уже проверяли
+							Subset Ret = RecourciveRemove(NewInsSolution,start-1, end);
 							if (Ret != null){return Ret;}
 						}
 					}
 				}
 			}
 		}
-		//точного решения нет, берем ближайшее снизу
+		//sum not found, we can take nearest solution
 		for (int n = MaxW-2; n>=0; n--)
 		{if (Solutions[n] != null) {return Solutions[n];}}
-		throw new Exception ("Сбой рассчетов.");
+		throw new Exception ("РЎР±РѕР№ СЂР°СЃСЃС‡РµС‚РѕРІ.");
 	}
 	
 	private Subset RecourciveRemove(Subset Solution, int kmax, int kmin )
@@ -117,10 +117,10 @@ public class SubsetSum {
 			if (newsumindex>=0 && newsumindex<2*MaxW)
 			{
 				Values[newsumindex]= 
-						Math.max(Values[newsumindex],n+1); //k+1 потому что индексы с 0 
+						Math.max(Values[newsumindex],n+1); 
 				Solutions[newsumindex]=(Subset) NewRemSolution.Clone();	
 				
-				if (n-1>0 && n-1>=kmin && newsumindex>MaxW-1) //последний элемент проверяем, если kmin != 0
+				if (n-1>0 && n-1>=kmin && newsumindex>MaxW-1) // sometimes kmin != 0
 				{
 					Subset Ret = RecourciveRemove(NewRemSolution, n-1, kmin);
 					if (Ret != null){return Ret;}

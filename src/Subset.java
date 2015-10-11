@@ -11,10 +11,10 @@ public class Subset implements Cloneable {
 	public Subset(int[] Set, BitSet SubsetFilling) throws IllegalArgumentException
 	{
 		if (SubsetFilling.length() > Set.length)
-		{throw new IllegalArgumentException("Размеры массива последовательности должен быть "
-				+ "не меньше размера массива производящей функции.");}	
+		{throw new IllegalArgumentException("Р Р°Р·РјРµСЂС‹ РјР°СЃСЃРёРІР° РїРѕСЃР»РµРґРѕРІР°С‚РµР»СЊРЅРѕСЃС‚Рё РґРѕР»Р¶РµРЅ Р±С‹С‚СЊ "
+				+ "РЅРµ РјРµРЅСЊС€Рµ СЂР°Р·РјРµСЂР° РјР°СЃСЃРёРІР° РїСЂРѕРёР·РІРѕРґСЏС‰РµР№ С„СѓРЅРєС†РёРё.");}	
 		if (Set.length <1)
-		{throw new IllegalArgumentException("Размер последовательности должен быть больше 0.");}
+		{throw new IllegalArgumentException("Р Р°Р·РјРµСЂ РїРѕСЃР»РµРґРѕРІР°С‚РµР»СЊРЅРѕСЃС‚Рё РґРѕР»Р¶РµРЅ Р±С‹С‚СЊ Р±РѕР»СЊС€Рµ 0.");}
 		
 		this.Set = Set;
 		this.SubsetFilling = SubsetFilling;
@@ -34,8 +34,8 @@ public class Subset implements Cloneable {
 	
 	public void BalancedInsert (int position)throws IllegalArgumentException
 	{
-		if (position< 0 || position > Set.length-1){throw new IllegalArgumentException("Позиция для включения "
-				+ "элемента последовательности за пределами размера последовательности.");}
+		if (position< 0 || position > Set.length-1){throw new IllegalArgumentException("РџРѕР·РёС†РёСЏ РґР»СЏ РІРєР»СЋС‡РµРЅРёСЏ "
+				+ "СЌР»РµРјРµРЅС‚Р° РїРѕСЃР»РµРґРѕРІР°С‚РµР»СЊРЅРѕСЃС‚Рё Р·Р° РїСЂРµРґРµР»Р°РјРё СЂР°Р·РјРµСЂР° РїРѕСЃР»РµРґРѕРІР°С‚РµР»СЊРЅРѕСЃС‚Рё.");}
 		if (!SubsetFilling.get(position))
 		{
 			SubsetFilling.set(position); Sum = Sum + Set[position];
@@ -43,8 +43,8 @@ public class Subset implements Cloneable {
 	}
 	public void BalancedRemove (int position)throws IllegalArgumentException
 	{
-		if (position< 0 || position > Set.length-1){throw new IllegalArgumentException("Позиция для включения "
-				+ "элемента последовательности за пределами размера последовательности.");}
+		if (position< 0 || position > Set.length-1){throw new IllegalArgumentException("РџРѕР·РёС†РёСЏ РґР»СЏ РІРєР»СЋС‡РµРЅРёСЏ "
+				+ "СЌР»РµРјРµРЅС‚Р° РїРѕСЃР»РµРґРѕРІР°С‚РµР»СЊРЅРѕСЃС‚Рё Р·Р° РїСЂРµРґРµР»Р°РјРё СЂР°Р·РјРµСЂР° РїРѕСЃР»РµРґРѕРІР°С‚РµР»СЊРЅРѕСЃС‚Рё.");}
 		if (SubsetFilling.get(position))
 		{
 			SubsetFilling.clear(position); Sum = Sum - Set[position];

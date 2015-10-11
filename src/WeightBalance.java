@@ -10,17 +10,17 @@ public class WeightBalance {
 		Scanner in = new Scanner(System.in);		
 		do
 		{
-			System.out.println("Введите последовательность натуральных чисел, разделенных любым символом (в одну строку):");
+			System.out.println("Р’РІРµРґРёС‚Рµ РїРѕСЃР»РµРґРѕРІР°С‚РµР»СЊРЅРѕСЃС‚СЊ РЅР°С‚СѓСЂР°Р»СЊРЅС‹С… С‡РёСЃРµР», СЂР°Р·РґРµР»РµРЅРЅС‹С… Р»СЋР±С‹Рј СЃРёРјРІРѕР»РѕРј (РІ РѕРґРЅСѓ СЃС‚СЂРѕРєСѓ):");
 	        String inputString = in.nextLine();     
 	        
-	        //убираем начальные и конечные нечисловые символы
+	        //deleting non-digits at the start and the end
 	        Pattern p = Pattern.compile("^\\D*((\\d+\\D+)*\\d+)\\D*$");  
 	        Matcher inputM = p.matcher(inputString);
 	        if (inputM.matches()){inputString = inputM.group(1);}
 
 	        inputStringArray = inputString.split("\\D+");
 			if (inputStringArray.length<=1)
-			{System.out.println("Нужно ввести последовательность из как минимум 2 чисел.");}
+			{System.out.println("РќСѓР¶РЅРѕ РІРІРµСЃС‚Рё РїРѕСЃР»РµРґРѕРІР°С‚РµР»СЊРЅРѕСЃС‚СЊ РёР· РєР°Рє РјРёРЅРёРјСѓРј 2 С‡РёСЃРµР».");}
 
 		}while (inputStringArray.length<=1);	
 		in.close();
@@ -46,7 +46,7 @@ public class WeightBalance {
 				else {System.out.println("no");}	
 			} 
 			catch (java.lang.OutOfMemoryError e)
-			{System.out.println("Недостаточно памяти.");}
+			{System.out.println("РќРµРґРѕСЃС‚Р°С‚РѕС‡РЅРѕ РїР°РјСЏС‚Рё.");}
 			catch (Exception e) 
 			{System.out.println(e.getMessage());}
 		}
