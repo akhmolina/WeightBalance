@@ -1,5 +1,6 @@
 import java.util.Scanner;
-
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class WeightBalance {
 
@@ -11,8 +12,13 @@ public class WeightBalance {
 		{
 			System.out.println("¬ведите последовательность натуральных чисел, разделенных любым символом (в одну строку):");
 	        String inputString = in.nextLine();     
-	        inputStringArray = inputString.split("\\D+");
+	        
+	        //убираем начальные и конечные нечисловые символы
+	        Pattern p = Pattern.compile("^\\D*((\\d+\\D+)*\\d+)\\D*$");  
+	        Matcher inputM = p.matcher(inputString);
+	        if (inputM.matches()){inputString = inputM.group(1);}
 
+	        inputStringArray = inputString.split("\\D+");
 			if (inputStringArray.length<=1)
 			{System.out.println("Ќужно ввести последовательность из как минимум 2 чисел.");}
 
@@ -23,12 +29,8 @@ public class WeightBalance {
 		int n = 0;
 		for (int i = 0; i< inputStringArray.length; i++)
 		{
-			try
-			{
 				numbers[n] = Integer.parseInt(inputStringArray[i]);
 				n++;
-			} 
-			catch (NumberFormatException e) {numbers[n] =0;} 
 		}
 		
 		SubsetSum SumSearch = new SubsetSum(numbers);
