@@ -52,7 +52,6 @@ public class SubsetSum {
 		int breakSolutionIndex = (int) (MaxW-1-Sum+BreakSolution.Sum);
 		Subset NewInsSolution = null; 
 		Subset[] LastSolutions;
-		int[] LastValues;
 		
 		Solutions = new Subset[2*MaxW]; //от Sum-MaxW+1  до Sum+MaxW
 		Values = new int[2*MaxW]; //от Sum-MaxW+1  до Sum+MaxW
@@ -68,7 +67,6 @@ public class SubsetSum {
 		
 		for (int i = bitnumber; i < Set.length; i++)
 		{	
-			LastValues = Values.clone();
 			LastSolutions = Solutions.clone();
 			for( int n = 0; n<MaxW-1; n++) //MaxW-1 не смотрим, ибо он уже есть решение
 			{
@@ -83,14 +81,15 @@ public class SubsetSum {
 					
 					if (newsumindex>=0 && newsumindex<2*MaxW)
 					{
+						int lastsum = Values[newsumindex];
 						Values[newsumindex]= 
-								Math.max(Values[newsumindex],LastValues[lastsumindex]);
+								Math.max(Values[newsumindex],Values[lastsumindex]);
 						Solutions[newsumindex]=(Subset) NewInsSolution.Clone();
 						
 						if (newsumindex>=MaxW)
 						{
 							int start = Values[newsumindex]-1; // тут -1, потому что индексы у нас с нуля, а значения с 1
-							int end = LastValues[newsumindex]-1;
+							int end = lastsum-1;
 							
 							Subset Ret = RecourciveRemove(NewInsSolution,start-1, end);// тут -1 потому что текущее значение уже проверяли
 							if (Ret != null){return Ret;}
